@@ -27,7 +27,7 @@ test -d $RUNDIR || mkdir -p $RUNDIR
 
 {% if newrelic_license_key is defined %}
 # Set the path to the newrelic config file
-NEW_RELIC_CONFIG_FILE=/webapps/glucosetracker/bin/newrelic.ini
+NEW_RELIC_CONFIG_FILE={{ virtualenv_path }}/bin/newrelic.ini
 export NEW_RELIC_CONFIG_FILE
 {% endif %}
 
