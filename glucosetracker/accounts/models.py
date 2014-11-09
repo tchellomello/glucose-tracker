@@ -17,7 +17,8 @@ class UserSettings(TimeStampedModel):
 
     time_zone = TimeZoneField(default=settings.TIME_ZONE)
 
-    glucose_unit = models.ForeignKey(Unit, null=False, blank=False, default=1)
+    glucose_unit = models.ForeignKey(Unit, null=False, blank=False,
+                                     default=Unit.objects.get(name='mg/dL'))
     default_category = models.ForeignKey(Category, null=True)
 
     glucose_low = models.PositiveIntegerField(

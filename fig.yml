@@ -12,12 +12,13 @@ postgresql:
 django:
   image: jcalazan/django
   environment:
+    - DJANGO_SETTINGS_MODULE=settings.local
     - POSTGRESQL_HOST=postgresql
   working_dir: /glucose-tracker/glucosetracker
   command: >
     bash -c "sleep 2
     && pip install -r ../requirements.txt
-    && python manage.py runserver 0.0.0.0:80 --settings=settings.local"
+    && python manage.py runserver 0.0.0.0:80"
   volumes:
     - /dockerfiles/glucose-tracker/python:/usr/local/lib/python2.7
     - ../glucose-tracker:/glucose-tracker

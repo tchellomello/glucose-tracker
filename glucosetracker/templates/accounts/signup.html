@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+
 {% block heading %}
 <h3>
     <span class="glyphicon glyphicon-check"></span>
@@ -7,8 +10,7 @@
 </h3>
 {% endblock %}
 
-{% load crispy_forms_tags %}
-
 {% block content %}
    {% crispy form %}
+<a href="{% provider_login_url 'twitter' %}">Twitter</a>
 {% endblock %}

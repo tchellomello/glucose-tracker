@@ -81,15 +81,24 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
 
-    # Used by Grappelli
+    # Used by Grappelli.
     'django.core.context_processors.request',
 
-    # 3rd-party context processors
+    # 3rd-party context processors.
     'stickymessages.context_processors.latest_sticky_message',
+    'allauth.account.context_processors.account',
+    'allauth.socialaccount.context_processors.socialaccount',
 
-    # GlucoseTracker context processors
+    # GlucoseTracker context processors.
     'core.context_processors.third_party_tracking_ids',
     'core.context_processors.site_info',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+
+    # 3rd-party auth backends.
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -129,6 +138,11 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
 
     # 3rd-party apps
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.twitter',
     'axes',
     'compressor',
     'crispy_forms',
@@ -213,3 +227,11 @@ REDACTOR_OPTIONS = {
     'toolbarFixed': 'true',
 }
 REDACTOR_UPLOAD = 'editor-uploads/'
+
+# Django-allauth settings.
+ACCOUNT_EMAIL_REQUIRED = True
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'SCOPE': ['email',],
+    }
+}

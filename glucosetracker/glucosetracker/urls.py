@@ -37,6 +37,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^redactor/', include('redactor.urls')),
+    url(r'^social-accounts/', include('allauth.urls')),
 
     url(r'^accounts/', include('accounts.urls')),
     url(r'^core/', include('core.urls')),

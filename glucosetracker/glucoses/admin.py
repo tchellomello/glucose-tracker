@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Glucose, Category
+from .models import Glucose, Category, Unit
 
 
 class GlucoseAdmin(admin.ModelAdmin):
@@ -28,5 +28,13 @@ class CategoryAdmin(admin.ModelAdmin):
     ]
 
 
+class UnitAdmin(admin.ModelAdmin):
+    list_display = [
+        'id',
+        'name',
+    ]
+
+
 admin.site.register(Glucose, GlucoseAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Unit, UnitAdmin)
