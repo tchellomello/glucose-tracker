@@ -36,8 +36,8 @@ urlpatterns = patterns('',
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
+    url(r'^allauth/', include('allauth.urls')),
     url(r'^redactor/', include('redactor.urls')),
-    url(r'^social-accounts/', include('allauth.urls')),
 
     url(r'^accounts/', include('accounts.urls')),
     url(r'^core/', include('core.urls')),

@@ -70,11 +70,11 @@ class SignUpView(FormView):
             user.set_password(password)
             user.save()
 
-            # Create an entry for the User Settings.
-            user_settings = UserSettings.objects.create(user=user)
-            user_settings.glucose_unit = form.cleaned_data['glucose_unit']
-            user_settings.time_zone = form.cleaned_data['time_zone']
-            user_settings.save()
+            # Update the user's settings (note that the UserSettings object is
+            # automatically created after the User object is created).
+            user.settings.glucose_unit = form.cleaned_data['glucose_unit']
+            user.settings.time_zone = form.cleaned_data['time_zone']
+            user.settings.save()
 
             logger.info('New user signed up: %s (%s)', user, user.email)
 

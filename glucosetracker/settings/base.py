@@ -142,7 +142,6 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.twitter',
     'axes',
     'compressor',
     'crispy_forms',
@@ -230,6 +229,7 @@ REDACTOR_UPLOAD = 'editor-uploads/'
 
 # Django-allauth settings.
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
         'SCOPE': ['email',],

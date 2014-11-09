@@ -12,5 +12,5 @@
 
 {% block content %}
    {% crispy form %}
-<a href="{% provider_login_url 'twitter' %}">Twitter</a>
+    <a href="{% provider_login_url 'facebook' method='oauth2' %}">Facebook</a>
 {% endblock %}

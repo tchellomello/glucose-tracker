@@ -53,7 +53,7 @@ class UserSettingsForm(forms.Form):
     username = forms.CharField(required=False)
     first_name = forms.CharField(label='First Name', required=False)
     last_name = forms.CharField(label='Last Name', required=False)
-    email = forms.EmailField(label='Email', required=False)
+    email = forms.EmailField(label='Email')
     time_zone = TimeZoneFormField(label='Time Zone')
 
     glucose_unit = forms.ModelChoiceField(
@@ -135,7 +135,7 @@ class UserSettingsForm(forms.Form):
         email = self.cleaned_data['email']
         user = User.objects.get(username=self.cleaned_data['username'])
 
-        if email != user.email:
+        if email.lower() != user.email.lower():
             if User.objects.filter(email__iexact=email):
                 raise forms.ValidationError('Another account is already using '
                                             'this email address.')
