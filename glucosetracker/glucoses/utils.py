@@ -18,10 +18,14 @@ def import_glucose_from_csv(user, csv_file):
     and perform a bulk create. This way, no records will be inserted unless
     all records are good.
 
+    Also note that we're using splitlines() to make sure 'universal newlines'
+    is used.
+
     Assumed order: value, category, record_date, record_time, notes
     """
     csv_data = []
-    reader = csv.reader(csv_file, delimiter=',', quotechar='"')
+    reader = csv.reader(csv_file.read().splitlines(), delimiter=',',
+                        quotechar='"')
     for row in reader:
         csv_data.append(row)
 
