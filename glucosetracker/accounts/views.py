@@ -123,7 +123,7 @@ class UserSettingsView(LoginRequiredMixin, FormView):
         form.full_clean()
 
         if form.is_valid():
-            user = self.request.user
+            user = request.user
             user.first_name = form.cleaned_data['first_name']
             user.last_name = form.cleaned_data['last_name']
             user.email = form.cleaned_data['email']
@@ -155,7 +155,7 @@ class UserSettingsView(LoginRequiredMixin, FormView):
             user.settings.glucose_target_max = glucose_target_max
             user.settings.save()
 
-            logger.info('Account Settings updated by %s', request.user)
+            logger.info('Account Settings updated by %s', user)
 
             return self.form_valid(form)
         else:
