@@ -38,6 +38,7 @@ exec {% if newrelic_license_key is defined %}newrelic-admin run-program {% endif
  		--name $NAME \
   		--workers $NUM_WORKERS \
   		--max-requests $MAX_REQUESTS \
+        --timeout 180 \
   		--user=$USER --group=$GROUP \
   		--log-level=debug \
   		--bind=unix:$SOCKFILE
