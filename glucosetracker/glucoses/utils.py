@@ -27,7 +27,7 @@ def import_glucose_from_csv(user, csv_file):
     reader = csv.reader(csv_file.read().splitlines(), delimiter=',',
                         quotechar='"')
     for row in reader:
-        csv_data.append(row)
+        csv_data.append([item.strip() for item in row])
 
     glucose_objects = []
 
