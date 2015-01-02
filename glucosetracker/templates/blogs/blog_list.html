@@ -22,6 +22,7 @@
     {% endif %}
 
     {% if is_paginated %}
+    <div class="row text-center">
         <ul class="pagination">
             {% if page_obj.has_previous %}
               <li><a href="{% url 'blog_list_view'%}?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
@@ -33,5 +34,6 @@
               <li><a href="{% url 'blog_list_view'%}?page={{ page_obj.next_page_number }}">&raquo;</a></li>
             {% endif %}
         </ul>
+    </div>
     {% endif %}
 {% endblock %}

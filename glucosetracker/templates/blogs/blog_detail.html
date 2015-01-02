@@ -4,14 +4,16 @@
 
 {% block heading %}
     <h2>{{ blog.title }}</h2>
-    <span class="text-muted">{% if blog.is_published %}<span class="glyphicon glyphicon-calendar"></span> {{ blog.date_published|date:'F j, Y' }}{% else %}{{ blog.status|capfirst }}{% endif %} by {{ blog.author.get_full_name }}</span>
-    {% if user.is_superuser %} <a href="{% url 'admin:blogs_blog_change' blog.id %}"><u>Edit</u></a>{% endif %}
+    <small>
+      <span class="text-muted">{% if blog.is_published %}<span class="glyphicon glyphicon-calendar"></span> {{ blog.date_published|date:'F j, Y' }}{% else %}{{ blog.status|capfirst }}{% endif %} by {{ blog.author.get_full_name }}</span>
+      {% if user.is_superuser %} <a href="{% url 'admin:blogs_blog_change' blog.id %}"><u>Edit</u></a>{% endif %}
+    </small>
 {% endblock %}
 
 {% block content %}
     <div class="addthis_native_toolbox body" style="padding-bottom:10px;"></div>
 
-    <div style="font-size:16px;">{{ blog.content|safe }}</div>
+    <div>{{ blog.content|safe }}</div>
 
     <div>
     {% if blog.tags.exists %}
