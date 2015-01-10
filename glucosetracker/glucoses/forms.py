@@ -239,7 +239,6 @@ class GlucoseInputForm(forms.ModelForm):
             Field('submit_button_type', type='hidden')
         )
 
-
     class Meta:
         model = Glucose
         exclude = ('user',)
