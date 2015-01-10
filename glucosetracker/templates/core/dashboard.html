@@ -16,29 +16,31 @@
 {% endif %}
     
     <div class="row">
-        <div class="col-md-6 panel">
-            <div class="btn-group">
-                <a href="{% url 'glucose_create'%}">
-                <button type="button" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-plus"></span> New Glucose</button>
-                </a>
-            </div>
-            <div class="btn-group">
-                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-                <span class="glyphicon glyphicon-stats"></span> Reports
-                <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                <li><a href="{% url 'glucose_filter' %}">Filter Data</a></li>
-                <li><a href="{% url 'glucose_charts' %}">Charts & Graphs</a></li>
-                <li class="divider"></li>
-                <li><a href="{% url 'glucose_email_report' %}">E-mail Report</a></li>
-                </ul>
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="btn-group">
+                    <a href="{% url 'glucose_create'%}">
+                    <button type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-plus"></span> New Glucose</button>
+                    </a>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-stats"></span> Reports
+                    <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                    <li><a href="{% url 'glucose_filter' %}">Filter Data</a></li>
+                    <li><a href="{% url 'glucose_charts' %}">Charts & Graphs</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{% url 'glucose_email_report' %}">E-mail Report</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
 
-        <div class="col-md-6 panel">
-            <div class="text-center">{% crispy form %}</div>
+        <div class="col-md-6">
+            <div class="panel text-center">{% crispy form %}</div>
         </div>
     </div> <!-- end row -->
 
