@@ -44,6 +44,7 @@
                                 <th class="min-tablet">Date</th>
                                 <th class="min-desktop">Time</th>
                                 <th class="none">Notes</th>
+                                <th class="none">Tags</th>
                                 <th class="all"></th>
                             </tr>
                         </thead>
@@ -84,8 +85,8 @@ $(document).ready(function() {
         "bServerSide": true,
         "sAjaxSource": "{{ data }}",
         "aaSorting": [ [2,'desc'], [3,'desc']],
-        // Disable sorting for the Actions column.
-        "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 5 ] } ]
+        // Disable sorting for the Tags and Actions columns.
+        "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 5, 6 ] } ]
     });
 
     // Submit the filter form and refresh the table data

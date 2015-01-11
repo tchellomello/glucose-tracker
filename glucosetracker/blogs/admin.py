@@ -41,8 +41,7 @@ class BlogAdmin(admin.ModelAdmin):
         """
         Retrieve the tags separated by comma.
         """
-        return ', '.join([t.name for t in obj.tags.all()]) \
-            if obj.tags.count() else ''
+        return ', '.join([t.name for t in obj.tags.all()])
     tag_list.short_description = 'Tags'
 
     def get_form(self, request, obj=None, **kwargs):

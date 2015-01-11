@@ -378,7 +378,7 @@ class GlucoseListJson(LoginRequiredMixin, BaseDatatableView):
     model = Glucose
 
     columns = ['value', 'category', 'record_date', 'record_time',
-               'notes', 'actions']
+               'notes', 'tags', 'actions']
     order_columns = ['value', 'category', 'record_date', 'record_time', 'notes']
     max_display_length = 500
 
@@ -407,6 +407,8 @@ class GlucoseListJson(LoginRequiredMixin, BaseDatatableView):
             return row.record_date.strftime('%m/%d/%Y')
         elif column == 'record_time':
             return row.record_time.strftime('%I:%M %p')
+        elif column == 'tags':
+            return ', '.join([t.name for t in row.tags.all()])
         elif column == 'actions':
             edit_link = """<a href="%s">
                 <img src="/static/images/icons/icon_changelink.gif"></a>""" % \
