@@ -3,5 +3,5 @@
 .idea
 .coverage
 .vagrant
-/media/
+/glucosetracker/media/
 vagrant_ansible_inventory_default
