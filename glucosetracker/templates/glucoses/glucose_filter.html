@@ -72,7 +72,7 @@
 $(document).ready(function() {
     var oTable = $('#glucose_table').dataTable( {
         "sDom": 'T<"clear">lrtip',
-        "sTableTools": {
+        "tableTools": {
             "sSwfPath": "{{ STATIC_URL }}datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
             "aButtons": [ "csv", "pdf", "print" ]
         },
