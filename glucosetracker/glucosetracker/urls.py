@@ -5,10 +5,11 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.sitemaps import GenericSitemap
 from django.contrib.sitemaps.views import sitemap
 
+from blogs.models import Blog
+from blogs.feeds import LatestBlogsFeed
 from core.views import HomePageView
 from core.sitemaps import StaticViewSitemap
 from glucoses.views import dashboard
-from blogs.models import Blog
 
 
 admin.autodiscover()
@@ -26,6 +27,7 @@ sitemaps = {
 urlpatterns = patterns('',
     url(r'^$', HomePageView.as_view(), name='home'),
 
+    # Sitemaps.
     url(
         r'^sitemap\.xml$',
         sitemap,
@@ -33,8 +35,16 @@ urlpatterns = patterns('',
         name='django.contrib.sitemaps.views.sitemap'
     ),
 
+    # Django admin.
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
+
+    # RSS feeds.
+    url(
+        regex=r'^latest/feed/$',
+        view=LatestBlogsFeed(),
+        name='rss_feed'
+    ),
 
     url(r'^redactor/', include('redactor.urls')),
 

@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>{% block title %}{{ site_name }} | Simple Glucose Management App{% endblock %}</title>
+        <title>{% block title %}Simple Glucose Management App | {{ site_name }}{% endblock %}</title>
 
         <!-- CSS -->
         {% compress css %}
@@ -27,6 +27,9 @@
                 body {padding-bottom: 40px;}
             </style>
         {% endblock %}
+
+        <!-- RSS Feed -->
+        <link rel="alternate" type="application/rss+xml" title="RSS Feed for {{ site_name }}" href="{% url 'rss_feed' %}" />
 
         {% block extrahead %}{% endblock %}
     </head>
