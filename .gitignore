@@ -3,5 +3,5 @@
 .idea
 .coverage
 .vagrant
-media/
+/media/
 vagrant_ansible_inventory_default
