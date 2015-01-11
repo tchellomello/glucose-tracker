@@ -313,7 +313,6 @@ class GlucoseCreateView(LoginRequiredMixin, CreateView):
 class GlucoseUpdateView(LoginRequiredMixin, UpdateView):
     model = Glucose
     context_object_name = 'glucose'
-    success_url = '/dashboard/'
     template_name = 'glucoses/glucose_update.html'
     form_class = GlucoseUpdateForm
 
@@ -328,6 +327,9 @@ class GlucoseUpdateView(LoginRequiredMixin, UpdateView):
             raise PermissionDenied
         else:
             return super(GlucoseUpdateView, self).get(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('dashboard')
 
     def get_object(self, queryset=None):
         obj = Glucose.objects.get(pk=self.kwargs['pk'])
@@ -412,7 +414,7 @@ class GlucoseListJson(LoginRequiredMixin, BaseDatatableView):
             delete_link = """<a href="%s">
                 <img src="/static/images/icons/icon_deletelink.gif"></a>""" % \
                 reverse('glucose_delete', args=(row.id,))
-            return '<center>%s&nbsp;%s</center>' % (edit_link, delete_link)
+            return '<center>%s&nbsp;&nbsp;%s</center>' % (edit_link, delete_link)
         else:
             return super(GlucoseListJson, self).render_column(row, column)
 

@@ -35,19 +35,19 @@
 
         <div class="col-sm-8 col-md-8">
             <div class="well">
-                <table id="glucose_table">
+                <table id="glucose_table" class="display responsive" width="100%">
                     <thead>
                         <tr>
-                            <th width="10%"><center>Value</center></th>
-                            <th width="15%">Category</th>
-                            <th width="15%">Date</th>
-                            <th width="15%">Time</th>
-                            <th width="35%">Notes</th>
-                            <th width="10%"></th>
+                            <th class="all"><center>Value</center></th>
+                            <th class="all">Category</th>
+                            <th class="min-tablet">Date</th>
+                            <th class="min-desktop">Time</th>
+                            <th class="none">Notes</th>
+                            <th class="all"></th>
                         </tr>
                     </thead>
                 </table>
-                <br>
+              <br>
             </div>
         </div>
 
@@ -57,19 +57,21 @@
 
 {% block extracss %}
 <link href="{{ STATIC_URL }}datatables/media/css/jquery.dataTables.css" rel="stylesheet">
-<link href="{{ STATIC_URL }}datatables/extras/TableTools/media/css/TableTools.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}datatables/extensions/Responsive/css/dataTables.responsive.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}datatables/extensions/TableTools/css/dataTables.tableTools.css" rel="stylesheet">
 {% endblock %}
 
 {% block extrajs %}
-<script src="{{ STATIC_URL }}datatables/media/js/jquery.dataTables.min.js"></script>
-<script src="{{ STATIC_URL }}datatables/extras/TableTools/media/js/TableTools.min.js"></script>
+<script src="{{ STATIC_URL }}datatables/media/js/jquery.dataTables.js"></script>
+<script src="{{ STATIC_URL }}datatables/extensions/Responsive/js/dataTables.responsive.js"></script>
+<script src="{{ STATIC_URL }}datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
 <script src="{{ STATIC_URL }}scripts/scripts.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    var oTable = $('#glucose_table').dataTable( {
+    var oTable = $('#glucose_table').DataTable( {
         "sDom": 'T<"clear">lrtip',
         "oTableTools": {
-            "sSwfPath": "{{ STATIC_URL }}datatables/extras/TableTools/media/swf/copy_csv_xls_pdf.swf",
+            "sSwfPath": "{{ STATIC_URL }}datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
             "aButtons": [ "csv", "pdf", "print" ]
         },
         "aLengthMenu": [
