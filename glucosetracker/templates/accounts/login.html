@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
 {% block extracss %}
-<link href="{{ STATIC_URL }}bootstrap/css/signin.css" rel="stylesheet">
+<link href="{% static 'bootstrap/css/signin.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block rootcontainer %}

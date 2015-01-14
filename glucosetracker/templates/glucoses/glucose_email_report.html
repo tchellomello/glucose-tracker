@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
 {% block extracss %}
-<link href="{{ STATIC_URL }}datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<link href="{% static 'datetimepicker/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block heading %}

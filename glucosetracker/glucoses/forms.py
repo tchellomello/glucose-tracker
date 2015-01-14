@@ -294,29 +294,6 @@ class GlucoseImportForm(forms.Form):
         self. helper.layout = Layout(
             MultiField(
                 None,
-                Fieldset(
-                    'Instructions',
-                    HTML(
-                        '''
-                        To properly import your data, the CSV file must follow
-                        this order and format: <br><br>
-                        <ol>
-                        <li>Value</li>
-                        <li>Category (if no matching category in our system,
-                        'No Category' will be assigned)</li>
-                        <li>Date (in m/d/yyyy format, e.g. 5/6/2014 or
-                        05/06/2014)</li>
-                        <li> Time (in h:m am/pm format, e.g. 8:01 AM or
-                        08:01 PM)</li>
-                        <li>Notes</li>
-                        </ol>
-                        <p>You can also download this template as a guide:
-                        <a href="{{ STATIC_URL }}samples/csv_import_template.csv">
-                        csv_import_template.csv</a></p>
-                        <br>
-                        '''
-                    ),
-                ),
                 HTML(
                     '''
                     {% if messages %}

@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
 {% load crispy_forms_tags %}
 
 {% block heading %}
@@ -150,18 +152,18 @@
 {% endblock %}
 
 {% block extracss %}
-<link href="{{ STATIC_URL }}datatables/media/css/jquery.dataTables.css" rel="stylesheet">
-<link href="{{ STATIC_URL }}datatables/extensions/Responsive/css/dataTables.responsive.css" rel="stylesheet">
-<link href="{{ STATIC_URL }}datatables/extensions/TableTools/css/dataTables.tableTools.css" rel="stylesheet">
+<link href="{% static 'datatables/media/css/jquery.dataTables.css' %}" rel="stylesheet">
+<link href="{% static 'datatables/extensions/Responsive/css/dataTables.responsive.css' %}" rel="stylesheet">
+<link href="{% static 'datatables/extensions/TableTools/css/dataTables.tableTools.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block extrajs %}
-<script src="{{ STATIC_URL }}datatables/media/js/jquery.dataTables.js"></script>
-<script src="{{ STATIC_URL }}datatables/extensions/Responsive/js/dataTables.responsive.js"></script>
-<script src="{{ STATIC_URL }}datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
-<script src="{{ STATIC_URL }}highcharts/js/highcharts.js"></script>
-<script src="{{ STATIC_URL }}highcharts/js/modules/exporting.js"></script>
-<script src="{{ STATIC_URL }}scripts/scripts.js"></script>
+<script src="{% static 'datatables/media/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'datatables/extensions/Responsive/js/dataTables.responsive.js' %}"></script>
+<script src="{% static 'datatables/extensions/TableTools/js/dataTables.tableTools.js' %}"></script>
+<script src="{% static 'highcharts/js/highcharts.js' %}"></script>
+<script src="{% static 'highcharts/js/modules/exporting.js' %}"></script>
+<script src="{% static 'scripts/scripts.js' %}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#id_hba1c_panel').tooltip();
@@ -255,7 +257,7 @@ $(document).ready(function() {
     var oTable = $('#glucose_table').dataTable( {
         "sDom": 'T<"clear">lrtip',
         "tableTools": {
-            "sSwfPath": "{{ STATIC_URL }}datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+            "sSwfPath": "{% static 'datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf' %}",
 		    "aButtons": [ "csv", "pdf", "print" ]
         },
         "bProcessing": true,

@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
 {% load humanize %}
 
 {% block extracss %}
-<link href="{{ STATIC_URL }}bootstrap/css/carousel.css" rel="stylesheet">
+<link href="{% static 'bootstrap/css/carousel.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block customcss %}
@@ -34,8 +35,8 @@
                 <br>
             </div>
             <div class="col-md-5">
-                <a href="{{ STATIC_URL }}images/screenshots/glucosetracker_dashboard_001.png" class="thumbnail">
-                    <img src="{{ STATIC_URL }}images/screenshots/glucosetracker_dashboard_001.png">
+                <a href="{% static 'images/screenshots/glucosetracker_dashboard_001.png' %}" class="thumbnail">
+                    <img src="{% static 'images/screenshots/glucosetracker_dashboard_001.png' %}">
                 </a>
                 <div class="addthis_sharing_toolbox text-center"></div>
             </div>
@@ -54,8 +55,8 @@
 
       <div class="row featurette">
         <div class="col-md-5">
-            <a href="{{ STATIC_URL }}images/screenshots/glucosetracker_charts_001.png" class="thumbnail">
-                <img class="featurette-image img-responsive" src="{{ STATIC_URL }}images/screenshots/glucosetracker_charts_001.png">
+            <a href="{% static 'images/screenshots/glucosetracker_charts_001.png' %}" class="thumbnail">
+                <img class="featurette-image img-responsive" src="{% static 'images/screenshots/glucosetracker_charts_001.png' %}">
             </a>
         </div>
         <div class="col-md-7">
@@ -75,8 +76,8 @@
           </p>
         </div>
         <div class="col-md-5">
-            <a href="{{ STATIC_URL }}images/screenshots/glucosetracker_filter_001.png" class="thumbnail">
-                <img class="featurette-image img-responsive" src="{{ STATIC_URL }}images/screenshots/glucosetracker_filter_001.png">
+            <a href="{% static 'images/screenshots/glucosetracker_filter_001.png' %}" class="thumbnail">
+                <img class="featurette-image img-responsive" src="{% static 'images/screenshots/glucosetracker_filter_001.png' %}">
             </a>
         </div>
       </div>
@@ -85,8 +86,8 @@
 
       <div class="row featurette">
         <div class="col-md-5">
-            <a href="{{ STATIC_URL }}images/screenshots/glucosetracker_email_001.png" class="thumbnail">
-                <img class="featurette-image img-responsive" src="{{ STATIC_URL }}images/screenshots/glucosetracker_email_001.png">
+            <a href="{% static 'images/screenshots/glucosetracker_email_001.png' %}" class="thumbnail">
+                <img class="featurette-image img-responsive" src="{% static 'images/screenshots/glucosetracker_email_001.png' %}">
             </a>
         </div>
         <div class="col-md-7">
@@ -108,8 +109,8 @@
           </p>
         </div>
         <div class="col-md-5">
-            <a href="{{ STATIC_URL }}images/screenshots/glucosetracker_import_from_csv_001.png" class="thumbnail">
-                <img class="featurette-image img-responsive" src="{{ STATIC_URL }}images/screenshots/glucosetracker_import_from_csv_001.png">
+            <a href="{% static 'images/screenshots/glucosetracker_import_from_csv_001.png' %}" class="thumbnail">
+                <img class="featurette-image img-responsive" src="{% static 'images/screenshots/glucosetracker_import_from_csv_001.png' %}">
             </a>
         </div>
       </div>
@@ -118,8 +119,8 @@
 
       <div class="row featurette">
         <div class="col-md-5">
-            <a href="{{ STATIC_URL }}images/screenshots/glucosetracker_dashboard_mobile_001.png" class="thumbnail">
-                <img class="featurette-image img-responsive" src="{{ STATIC_URL }}images/screenshots/glucosetracker_dashboard_mobile_001.png">
+            <a href="{% static 'images/screenshots/glucosetracker_dashboard_mobile_001.png' %}" class="thumbnail">
+                <img class="featurette-image img-responsive" src="{% static 'images/screenshots/glucosetracker_dashboard_mobile_001.png' %}">
             </a>
         </div>
         <div class="col-md-7">
@@ -138,5 +139,5 @@
 {% endblock %}
 
 {% block extrajs %}
-<script src="{{ STATIC_URL }}bootstrap/js/holder.js"></script>
+<script src="{% static 'bootstrap/js/holder.js' %}"></script>
 {% endblock %}
