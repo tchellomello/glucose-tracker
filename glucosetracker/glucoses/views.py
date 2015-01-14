@@ -1,16 +1,23 @@
 import json
 import logging
+import operator
 from datetime import datetime, timedelta
 
-from django.views.generic import CreateView, UpdateView, DeleteView, \
-    FormView, TemplateView
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, HttpResponse
 from django.template import RequestContext
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    FormView,
+    TemplateView,
+    UpdateView,
+)
 
 from braces.views import LoginRequiredMixin
 from django_datatables_view.base_datatable_view import BaseDatatableView
@@ -20,8 +27,14 @@ from core.utils import glucose_by_unit_setting, to_mg
 from .utils import get_initial_category, import_glucose_from_csv
 from .models import Glucose
 from .reports import GlucoseCsvReport, GlucosePdfReport, ChartData, UserStats
-from .forms import GlucoseCreateForm, GlucoseUpdateForm, GlucoseQuickAddForm, \
-    GlucoseEmailReportForm, GlucoseFilterForm, GlucoseImportForm
+from .forms import (
+    GlucoseCreateForm,
+    GlucoseImportForm,
+    GlucoseEmailReportForm,
+    GlucoseFilterForm,
+    GlucoseQuickAddForm,
+    GlucoseUpdateForm,
+)
 
 
 DATE_FORMAT = '%m/%d/%Y'
@@ -461,7 +474,8 @@ class GlucoseListJson(LoginRequiredMixin, BaseDatatableView):
 
         notes = params.get('notes', '')
         if notes:
-            qs = qs.filter(notes__contains=notes)
+            qs = qs.filter(reduce(
+                operator.and_, (Q(notes__icontains=i) for i in notes.split())))
 
         tags = params.get('tags', '')
         if tags:
