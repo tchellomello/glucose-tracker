@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-{% load staticfiles %}
-
 {% load crispy_forms_tags %}
 
 {% block heading %}
@@ -152,18 +150,18 @@
 {% endblock %}
 
 {% block extracss %}
-<link href="{% static 'datatables/media/css/jquery.dataTables.css' %}" rel="stylesheet">
-<link href="{% static 'datatables/extensions/Responsive/css/dataTables.responsive.css' %}" rel="stylesheet">
-<link href="{% static 'datatables/extensions/TableTools/css/dataTables.tableTools.css' %}" rel="stylesheet">
+<link href="{{ STATIC_URL }}datatables/media/css/jquery.dataTables.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}datatables/extensions/Responsive/css/dataTables.responsive.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}datatables/extensions/TableTools/css/dataTables.tableTools.css" rel="stylesheet">
 {% endblock %}
 
 {% block extrajs %}
-<script src="{% static 'datatables/media/js/jquery.dataTables.js' %}"></script>
-<script src="{% static 'datatables/extensions/Responsive/js/dataTables.responsive.js' %}"></script>
-<script src="{% static 'datatables/extensions/TableTools/js/dataTables.tableTools.js' %}"></script>
-<script src="{% static 'highcharts/js/highcharts.js' %}"></script>
-<script src="{% static 'highcharts/js/modules/exporting.js' %}"></script>
-<script src="{% static 'scripts/scripts.js' %}"></script>
+<script src="{{ STATIC_URL }}datatables/media/js/jquery.dataTables.js"></script>
+<script src="{{ STATIC_URL }}datatables/extensions/Responsive/js/dataTables.responsive.js"></script>
+<script src="{{ STATIC_URL }}datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
+<script src="{{ STATIC_URL }}highcharts/js/highcharts.js"></script>
+<script src="{{ STATIC_URL }}highcharts/js/modules/exporting.js"></script>
+<script src="{{ STATIC_URL }}scripts/scripts.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#id_hba1c_panel').tooltip();
@@ -182,7 +180,7 @@ $(document).ready(function() {
                     data['stats']['hba1c']['value'];
                 document.getElementById('id_hba1c').className =
                     "text-center " + data['stats']['hba1c']['css_class'];
-                    
+
                 /*document.getElementById('id_num_records').innerHTML =
                     data['stats']['num_records'];*/
 
@@ -190,12 +188,12 @@ $(document).ready(function() {
                     data['stats']['breakdown']['lowest']['value'];
                 document.getElementById('id_lowest').className =
                     data['stats']['breakdown']['lowest']['css_class'];
-                    
+
                 document.getElementById('id_highest').innerHTML =
                     data['stats']['breakdown']['highest']['value'];
                 document.getElementById('id_highest').className =
                     data['stats']['breakdown']['highest']['css_class'];
-                    
+
                 document.getElementById('id_average').innerHTML =
                     data['stats']['breakdown']['average']['value'];
                 document.getElementById('id_average').className =
@@ -255,10 +253,10 @@ $(document).ready(function() {
 
 
     var oTable = $('#glucose_table').dataTable( {
-        "sDom": 'T<"clear">lrtip',
+        "sDom": 'T<"container">flrtip',
         "tableTools": {
-            "sSwfPath": "{% static 'datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf' %}",
-		    "aButtons": [ "csv", "pdf", "print" ]
+            "sSwfPath": "{{ STATIC_URL }}datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+		        "aButtons": [ "csv", "pdf", "print" ]
         },
         "bProcessing": true,
         "bServerSide": true,

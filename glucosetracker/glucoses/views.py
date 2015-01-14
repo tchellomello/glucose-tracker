@@ -450,6 +450,17 @@ class GlucoseListJson(LoginRequiredMixin, BaseDatatableView):
     def filter_queryset(self, qs):
         params = self.request.GET
 
+        search = params.get('sSearch')
+        if search:
+            qs = qs.filter(
+                Q(value__startswith=search) |
+                Q(category__name__istartswith=search) |
+                reduce(operator.and_, (Q(notes__icontains=i) for i in
+                                       search.split())) |
+                reduce(operator.and_, (Q(tags__name__icontains=i) for i in
+                                       search.split()))
+            )
+
         start_date = params.get('start_date', '')
         if start_date:
             qs = qs.filter(record_date__gte=datetime.strptime(
