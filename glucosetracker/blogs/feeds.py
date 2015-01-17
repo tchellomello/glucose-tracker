@@ -9,7 +9,7 @@ from blogs.models import Blog
 class LatestBlogsFeed(Feed):
     site_name = Site.objects.get(pk=settings.SITE_ID).name
     title = 'Simple Glucose Management App | %s' % site_name
-    link = '/blogfeed/'
+    link = '/'
     description = 'Updates on changes and additions to %s' % site_name
 
     def items(self):
