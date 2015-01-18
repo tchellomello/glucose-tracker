@@ -132,11 +132,21 @@ class GlucoseEmailReportForm(forms.Form):
             ('pdf', 'PDF'),
         )
     )
+
+    optional_fields = forms.MultipleChoiceField(
+        choices=(
+            ('notes', 'Notes'),
+            ('tags', 'Tags'),
+        ),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+
     start_date = forms.DateField(label='From')
     end_date = forms.DateField(label='To')
     subject = forms.CharField(required=False)
     recipient = forms.EmailField(label='Send To')
-    message = forms.CharField(widget=forms.Textarea(attrs={'cols':50}),
+    message = forms.CharField(widget=forms.Textarea(attrs={'cols': 50}),
                               required=False)
 
     def __init__(self, *args, **kwargs):
@@ -163,6 +173,7 @@ class GlucoseEmailReportForm(forms.Form):
                         'report_format',
                         Field('start_date', required=True),
                         Field('end_date', required=True),
+                        'optional_fields',
                         css_class='well col-sm-4 col-md-4',
                     ),
                     Div('subject',
@@ -187,6 +198,7 @@ class GlucoseEmailReportForm(forms.Form):
         self.fields['end_date'].initial = now.strftime(DATE_FORMAT)
 
         self.fields['report_format'].initial = 'pdf'
+        self.fields['optional_fields'].initial = ['notes']
         self.fields['subject'].initial = '[GlucoseTracker] Glucose Data Report'
 
 

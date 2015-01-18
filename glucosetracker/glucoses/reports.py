@@ -263,10 +263,13 @@ class ChartData(object):
 
 class GlucoseBaseReport(object):
 
-    def __init__(self, start_date, end_date, user):
+    def __init__(self, start_date, end_date, user, include_notes=True,
+                 include_tags=True):
         self.start_date = start_date
         self.end_date = end_date
         self.user = user
+        self.include_notes = include_notes
+        self.include_tags = include_tags
         self.email_footer = '----------\nSent from https://%s' % \
                             settings.SITE_DOMAIN
 
@@ -283,17 +286,33 @@ class GlucoseCsvReport(GlucoseBaseReport):
 
         csv_data = cStringIO.StringIO()
         try:
+            headers = ['Value', 'Category', 'Date', 'Time']
+
+            if self.include_notes:
+                headers.append('Notes')
+
+            if self.include_tags:
+                headers.append('Tags')
+
             writer = csv.writer(csv_data)
-            writer.writerow(['Value', 'Category', 'Date', 'Time', 'Notes'])
+            writer.writerow(headers)
 
             for item in data:
-                writer.writerow([
+                row = [
                     self.glucose_by_unit_setting(item.value),
                     item.category,
                     item.record_date.strftime(DATE_FORMAT),
                     item.record_time.strftime(TIME_FORMAT),
-                    item.notes,
-                ])
+                ]
+
+                if self.include_notes:
+                    row.append(item.notes)
+
+                if self.include_tags:
+                    tag_list = ', '.join([t.name for t in item.tags.all()])
+                    row.append(tag_list)
+
+                writer.writerow(row)
 
             logging.info('CSV report generated for %s', self.user)
 
@@ -318,8 +337,8 @@ class GlucoseCsvReport(GlucoseBaseReport):
 
 class GlucosePdfReport(GlucoseBaseReport):
 
-    def __init__(self, start_date, end_date, user):
-        super(GlucosePdfReport, self).__init__(start_date, end_date, user)
+    def __init__(self, *args, **kwargs):
+        super(GlucosePdfReport, self).__init__(*args, **kwargs)
 
         self.styles = getSampleStyleSheet()
         self.styles.add(ParagraphStyle(name='Center', alignment=TA_CENTER))
@@ -334,13 +353,18 @@ class GlucosePdfReport(GlucoseBaseReport):
         self.top_margin = 0.7 * inch
         self.bottom_margin = 0.7 * inch
 
-        self.fields = (
+        self.fields = [
             ('value', 'Value'),
             ('category', 'Category'),
             ('date', 'Date'),
             ('time', 'Time'),
-            ('notes', 'Notes'),
-        )
+        ]
+
+        if self.include_notes:
+            self.fields.append(('notes', 'Notes'))
+
+        if self.include_tags:
+            self.fields.append(('tags', 'Tags'))
 
     def generate(self):
         qs = Glucose.objects.by_date(
@@ -359,13 +383,21 @@ class GlucosePdfReport(GlucoseBaseReport):
             if value < low or value > high:
                 value_by_unit_setting = '<b>%s</b>' % value_by_unit_setting
 
-            data.append({
+            data_dict = {
                 'value': self.to_paragraph(value_by_unit_setting),
                 'category': i.category,
                 'date': i.record_date.strftime(DATE_FORMAT),
                 'time': i.record_time.strftime(TIME_FORMAT),
-                'notes': self.to_paragraph(i.notes),
-            })
+            }
+
+            if self.include_notes:
+                data_dict['notes'] = self.to_paragraph(i.notes)
+
+            if self.include_tags:
+                tag_list = ', '.join([t.name for t in i.tags.all()])
+                data_dict['tags'] = self.to_paragraph(tag_list)
+
+            data.append(data_dict)
 
         buffer = BytesIO()
         doc = SimpleDocTemplate(buffer,
@@ -384,16 +416,14 @@ class GlucosePdfReport(GlucoseBaseReport):
         story.append(Spacer(1, 0.25 * inch))
 
         converted_data = self.__convert_data(data)
-        table = Table(converted_data,
-                      self.get_width_from_percent([10, 20, 15, 15, 40]),
-                      hAlign='LEFT')
+        table = Table(converted_data, hAlign='LEFT')
         table.setStyle(TableStyle([
             ('FONT', (0, 0), (-1, 0), 'Helvetica-Bold'),
             ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
             ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
-            ('ALIGN',(1, 0),(0,-1), 'LEFT'),
+            ('ALIGN', (1, 0), (0, -1), 'LEFT'),
             ('INNERGRID', (0, 0), (-1, -1), 0.50, colors.black),
-            ('BOX', (0,0), (-1,-1), 0.25, colors.black),
+            ('BOX', (0, 0), (-1, -1), 0.25, colors.black),
         ]))
 
         story.append(table)

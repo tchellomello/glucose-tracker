@@ -239,14 +239,20 @@ class GlucoseEmailReportView(LoginRequiredMixin, FormView):
         form = self.get_form(form_class)
 
         if form.is_valid():
+            optional_fields = form.cleaned_data['optional_fields']
+
             if form.cleaned_data['report_format'] == 'pdf':
                 report = GlucosePdfReport(form.cleaned_data['start_date'],
                                           form.cleaned_data['end_date'],
-                                          request.user)
+                                          request.user,
+                                          'notes' in optional_fields,
+                                          'tags' in optional_fields)
             else:
                 report = GlucoseCsvReport(form.cleaned_data['start_date'],
                                           form.cleaned_data['end_date'],
-                                          request.user)
+                                          request.user,
+                                          'notes' in optional_fields,
+                                          'tags'in optional_fields)
 
             logger.info(
                 'Sending email report from user: %s, subject: %s, recipient: %s',
