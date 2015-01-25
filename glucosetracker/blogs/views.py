@@ -21,8 +21,7 @@ class BlogDetailView(DetailView, BlogBaseView):
 
     def get_queryset(self):
         """
-        Only return the object if status is 'published', unless the user is
-        a superuser.
+        Only return the object if it's public, unless the user is a superuser.
         """
         if self.request.user.is_authenticated() and \
                 self.request.user.is_superuser:
@@ -37,16 +36,9 @@ class BlogListView(ListView, BlogBaseView):
 
     def get_queryset(self):
         """
-        Only return the object if status is 'published', unless the user is
-        a superuser.
+        Only return public blog posts.
         """
-        if self.request.user.is_authenticated() and \
-                self.request.user.is_superuser:
-            result = Blog.objects.all()
-        else:
-            result = Blog.objects.publicly_viewable()
-
-        return result
+        return Blog.objects.publicly_viewable()
 
 
 class BlogTagListView(BlogListView):

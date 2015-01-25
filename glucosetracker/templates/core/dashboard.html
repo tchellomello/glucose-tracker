@@ -258,6 +258,10 @@ $(document).ready(function() {
             "sSwfPath": "{{ STATIC_URL }}datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
 		        "aButtons": [ "csv", "pdf" ]
         },
+        "aLengthMenu": [
+            [10, 15, 25, 50, 75, 100],
+            [10, 15, 25, 50, 75, 100],
+        ],
         "bProcessing": true,
         "bServerSide": true,
         "sAjaxSource": "{% url 'glucose_list_json' %}",

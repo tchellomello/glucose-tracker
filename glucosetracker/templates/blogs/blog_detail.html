@@ -17,7 +17,7 @@
 
     <div>
     {% if blog.tags.exists %}
-        <p><span class="glyphicon glyphicon-tags"></span> Tags: {% for tag_name in blog.tags.names %}<a href="{% url 'blog_tag_list_view' tag_name %}">{{ tag_name }}</a> {% endfor %}</p>
+        <p><span class="glyphicon glyphicon-tags"></span> <strong>Tags:</strong> {% for tag in blog.tags.values %}<a href="{% url 'blog_tag_list_view' tag.slug %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
     {% endif %}
     </div>
 
