@@ -141,3 +141,8 @@
 {% block extrajs %}
 <script src="{% static 'bootstrap/js/holder.js' %}"></script>
 {% endblock %}
+
+{% block extrajsexternal %}
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid={{ addthis_publisher_id }}"></script>
+{% endblock %}
