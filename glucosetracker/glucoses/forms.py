@@ -178,7 +178,7 @@ class GlucoseEmailReportForm(forms.Form):
                     ),
                     Div('subject',
                         Field('recipient', placeholder='Email address',
-                              required=True, autofocus=True),
+                              required=True),
                         'message',
                         FormActions(
                             Submit('submit', 'Send'),
