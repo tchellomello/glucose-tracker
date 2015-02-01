@@ -4,7 +4,7 @@
 
 {% block heading %}
     <h3>
-        <span class="glyphicon glyphicon-list-alt"></span> Blog Posts
+        <span class="fa fa-list-alt"></span> Blog Posts
         {% if user.is_superuser %} <small><a href="{% url 'admin:blogs_blog_add' %}"><u>Add</u></a></small>{% endif %}
     </h3>
 {% endblock %}
@@ -13,7 +13,7 @@
     {% if blog_list %}
         {% for blog in blog_list %}
             <h4><a href="{% url 'blog_detail_view' blog.slug %}">{{ blog.title }}</a></h4>
-            <span class="text-muted">{% if blog.is_published %}<span class="glyphicon glyphicon-calendar"></span> {{ blog.date_published|date:'F j, Y' }}{% else %}{{ blog.status|capfirst }}{% endif %} by {{ blog.author.get_full_name }}</span>
+            <span class="text-muted">{% if blog.is_published %}<span class="fa fa-calendar"></span> {{ blog.date_published|date:'F j, Y' }}{% else %}{{ blog.status|capfirst }}{% endif %} by {{ blog.author.get_full_name }}</span>
             {% if user.is_superuser %} <a href="{% url 'admin:blogs_blog_change' blog.id %}"><u>Edit</u></a>{% endif %}
             <hr>
         {% endfor %}

@@ -19,6 +19,7 @@
         <link href="{% static 'bootstrap/css/bootstrap-theme.css' %}" rel="stylesheet">
         <link href="{% static 'bootstrap/css/sticky-footer-navbar.css' %}" rel="stylesheet">
         <link href="{% static 'datetimepicker/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
+        <link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet">
 
         {% block extracss %}{% endblock %}
         {% endcompress %}
@@ -54,10 +55,10 @@
                 </button>
                 {% if user.is_authenticated %}
                 <a class="navbar-brand" href="{% url 'dashboard' %}">
-                  <span class="glyphicon glyphicon-tint"></span> GlucoseTracker</a>
+                  <span class="fa fa-tint"></span> GlucoseTracker</a>
                 {% else %}
                 <a class="navbar-brand" href="/">
-                  <span class="glyphicon glyphicon-tint"></span> GlucoseTracker</a>
+                  <span class="fa fa-tint"></span> GlucoseTracker</a>
                 {% endif %}
             </div>
 
@@ -66,16 +67,16 @@
               <ul class="nav navbar-nav navbar-right">
                   {% if user.is_authenticated %}
                     <li><a href="{% url 'glucose_create' %}">
-                        <span class="glyphicon glyphicon-plus"></span>&nbsp;New Glucose</a>
+                        <span class="fa fa-plus"></span>&nbsp;New Glucose</a>
                     </li>
 
                     <li><a href="{% url 'dashboard' %}">
-                        <span class="glyphicon glyphicon-th"></span>&nbsp;Dashboard</a>
+                        <span class="fa fa-th"></span>&nbsp;Dashboard</a>
                     </li>
 
                     <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                         <span class="glyphicon glyphicon-stats"></span>&nbsp;Reports <b class="caret"></b></a>
+                         <span class="fa fa-bar-chart"></span>&nbsp;Reports <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                       <li><a href="{% url 'glucose_filter' %}">Filter Data</a></li>
                       <li><a href="{% url 'glucose_charts' %}">Charts & Graphs</a></li>
@@ -86,7 +87,7 @@
 
                     <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-user"></span>&nbsp;
+                        <span class="fa fa-user"></span>&nbsp;
                         {{ user }} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                       <li><a href="{% url 'usersettings' %}">Account Settings</a></li>

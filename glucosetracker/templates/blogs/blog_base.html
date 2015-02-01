@@ -22,12 +22,12 @@
                 <!-- Tags panel -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span> <strong>Tags</strong></h3>
+                        <h3 class="panel-title"><span class="fa fa-tags"></span> <strong>Tags</strong></h3>
                     </div>
                     <div class="panel-body">
                         {% for tag in blog_tags %}
                         <ul>
-                            <li class="glyphicon glyphicon-tag"> <a href="{% url 'blog_tag_list_view' tag.name %}">{{ tag.name }}</a></li>
+                            <li class="fa fa-tag"> <a href="{% url 'blog_tag_list_view' tag.name %}">{{ tag.name }}</a></li>
                         </ul>
                         {% endfor %}
                         <a href="{% url 'blog_list_view' %}">See all posts...</a>

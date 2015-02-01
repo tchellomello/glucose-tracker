@@ -5,7 +5,7 @@
 {% block heading %}
     <h2>{{ blog.title }}</h2>
     <small>
-      <span class="text-muted">{% if blog.is_published %}<span class="glyphicon glyphicon-calendar"></span> {{ blog.date_published|date:'F j, Y' }}{% else %}{{ blog.status|capfirst }}{% endif %} by {{ blog.author.get_full_name }}</span>
+      <span class="text-muted">{% if blog.is_published %}<span class="fa fa-calendar"></span> {{ blog.date_published|date:'F j, Y' }}{% else %}{{ blog.status|capfirst }}{% endif %} by {{ blog.author.get_full_name }}</span>
       {% if user.is_superuser %} <a href="{% url 'admin:blogs_blog_change' blog.id %}"><u>Edit</u></a>{% endif %}
     </small>
 {% endblock %}
@@ -17,7 +17,7 @@
 
     <div>
     {% if blog.tags.exists %}
-        <p><span class="glyphicon glyphicon-tags"></span> <strong>Tags:</strong> {% for tag in blog.tags.values %}<a href="{% url 'blog_tag_list_view' tag.slug %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+        <p><span class="fa fa-tags"></span> <strong>Tags:</strong> {% for tag in blog.tags.values %}<a href="{% url 'blog_tag_list_view' tag.slug %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</p>
     {% endif %}
     </div>
 
@@ -38,7 +38,7 @@
 {% block extrapanelsbefore %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"></span> <strong>Recent Posts</strong></h3>
+            <h3 class="panel-title"><span class="fa fa-list-alt"></span> <strong>Recent Posts</strong></h3>
         </div>
         <div class="panel-body">
             <ul>
