@@ -8,9 +8,7 @@
   tags: deploy
 
 - include: setup_django_app.yml
-  tags:
-    - django
-    - deploy
+  tags: deploy
     
 - include: setup_supervisor.yml
 
