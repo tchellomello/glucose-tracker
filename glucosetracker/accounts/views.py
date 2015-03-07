@@ -13,7 +13,6 @@ from braces.views import LoginRequiredMixin
 
 from core.utils import glucose_by_unit_setting, to_mg
 
-from .models import UserSettings
 from .forms import UserSettingsForm, SignUpForm
 
 
@@ -70,11 +69,10 @@ class SignUpView(FormView):
             user.set_password(password)
             user.save()
 
-            # Create an entry for the User Settings.
-            user_settings = UserSettings.objects.create(user=user)
-            user_settings.glucose_unit = form.cleaned_data['glucose_unit']
-            user_settings.time_zone = form.cleaned_data['time_zone']
-            user_settings.save()
+            # Update the user's settings.
+            user.settings.glucose_unit = form.cleaned_data['glucose_unit']
+            user.settings.time_zone = form.cleaned_data['time_zone']
+            user.settings.save()
 
             logger.info('New user signed up: %s (%s)', user, user.email)
 
