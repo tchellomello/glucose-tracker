@@ -235,7 +235,9 @@ $(document).ready(function() {
         subtitle: {text: 'Last 14 Days'},
         xAxis: {title: {text: null}, labels: {rotation: -45}},
         yAxis: {title: {text: null}},
-        series: [{}],
+        series: [{
+            animation: false
+        }],
     };
 
     var chartDataUrl = "{% url 'chart_data_json' %}?name=avg_by_day&days=14";
