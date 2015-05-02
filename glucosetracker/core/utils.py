@@ -72,7 +72,7 @@ def glucose_by_unit_setting(user, value):
     Glucose values are stored in mg/dL in the database. If a user's setting
     is set to mmol/L, convert the value.
     """
-    if user.settings.glucose_unit.name=='mmol/L':
+    if user.settings.glucose_unit.name == 'mmol/L':
         return to_mmol(value)
     else:
         return value

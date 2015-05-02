@@ -3,6 +3,8 @@ from datetime import datetime
 
 from django.core.exceptions import ObjectDoesNotExist
 
+from core.utils import to_mg
+
 from .models import Category, Glucose
 
 
@@ -45,9 +47,17 @@ def import_glucose_from_csv(user, csv_file):
             except ObjectDoesNotExist:
                 category = Category.objects.get(name__iexact='No Category'.strip())
 
+            # Since we always store the value in mg/dL format in the db, we need
+            # to make sure we convert it here if the user's setting is set to
+            # mmol/L.
+            if user.settings.glucose_unit.name == 'mmol/L':
+                value = int(to_mg(row[0]))
+            else:
+                value = int(row[0])
+
             glucose_objects.append(Glucose(
                 user=user,
-                value=int(row[0]),
+                value=value,
                 category=category,
                 record_date=datetime.strptime(row[2], DATE_FORMAT),
                 record_time=datetime.strptime(row[3], TIME_FORMAT),
