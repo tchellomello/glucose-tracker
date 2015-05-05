@@ -413,10 +413,10 @@ class GlucoseListJson(LoginRequiredMixin, BaseDatatableView):
             value_by_unit_setting = glucose_by_unit_setting(user, row.value)
             edit_url = reverse('glucose_update', args=(row.id,))
             text_class = 'text-primary'
-            
+
             if row.value < low or row.value > high:
                 text_class = 'text-danger'
-            elif row.value >= target_min <= target_max:
+            elif target_max >= row.value >= target_min:
                 text_class = 'text-success'
 
             return '''<center><a class="%s" href="%s">%s</a></center>''' % \
