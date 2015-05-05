@@ -397,7 +397,7 @@ class GlucoseListJson(LoginRequiredMixin, BaseDatatableView):
     model = Glucose
 
     columns = ['value', 'category', 'record_date', 'record_time',
-               'notes', 'tags', 'actions']
+               'notes', 'tags', 'delete']
     order_columns = ['value', 'category', 'record_date', 'record_time', 'notes']
     max_display_length = 500
 
@@ -412,14 +412,16 @@ class GlucoseListJson(LoginRequiredMixin, BaseDatatableView):
         if column == 'value':
             value_by_unit_setting = glucose_by_unit_setting(user, row.value)
             edit_url = reverse('glucose_update', args=(row.id,))
+            text_class = 'text-primary'
+            
             if row.value < low or row.value > high:
-                return self.get_value_cell_style(edit_url, value_by_unit_setting,
-                                                 'red')
-            elif row.value >= target_min and row.value <= target_max:
-                return self.get_value_cell_style(edit_url, value_by_unit_setting,
-                                                 'green')
-            else:
-                return self.get_value_cell_style(edit_url, value_by_unit_setting)
+                text_class = 'text-danger'
+            elif row.value >= target_min <= target_max:
+                text_class = 'text-success'
+
+            return '''<center><a class="%s" href="%s">%s</a></center>''' % \
+                (text_class, edit_url, value_by_unit_setting)
+
         elif column == 'category':
             return '%s' % row.category.name
         elif column == 'record_date':
@@ -428,24 +430,13 @@ class GlucoseListJson(LoginRequiredMixin, BaseDatatableView):
             return row.record_time.strftime('%I:%M %p')
         elif column == 'tags':
             return ', '.join([t.name for t in row.tags.all()])
-        elif column == 'actions':
-            edit_link = """<a href="%s">
-                <img src="/static/images/icons/icon_changelink.gif"></a>""" % \
-                reverse('glucose_update', args=(row.id,))
-            delete_link = """<a href="%s">
-                <img src="/static/images/icons/icon_deletelink.gif"></a>""" % \
-                reverse('glucose_delete', args=(row.id,))
-            return '<center>%s&nbsp;&nbsp;%s</center>' % (edit_link, delete_link)
+        elif column == 'delete':
+            delete_url = reverse('glucose_delete', args=(row.id,))
+            delete_link = '<a href="%s"><i class="fa fa-times text-danger">' \
+                          '</i></a>' % delete_url
+            return '<center>%s</center>' % delete_link
         else:
             return super(GlucoseListJson, self).render_column(row, column)
-
-    def get_value_cell_style(self, url, value, color=None):
-        style = '''<center><a href="%s">%s</a></center>''' % (url, value)
-        if color:
-            style = '''<center><a href="%s"><font color="%s">%s</font></a>
-                </center>''' % (url, color, value)
-
-        return style
 
     def get_initial_queryset(self):
         """
