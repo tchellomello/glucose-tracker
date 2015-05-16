@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response, HttpResponse
 from django.template import RequestContext
 from django.views.generic import (
@@ -351,7 +351,10 @@ class GlucoseUpdateView(LoginRequiredMixin, UpdateView):
         return reverse('dashboard')
 
     def get_object(self, queryset=None):
-        obj = Glucose.objects.get(pk=self.kwargs['pk'])
+        try:
+            obj = Glucose.objects.get(pk=self.kwargs['pk'])
+        except Glucose.DoesNotExist:
+            raise Http404
 
         # Convert the value based on user's glucose unit setting.
         obj.value = glucose_by_unit_setting(self.request.user, obj.value)
