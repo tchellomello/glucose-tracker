@@ -158,6 +158,13 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 # Session cookie expiration in seconds
 SESSION_COOKIE_AGE = 7776000
 
+# SMTP settings
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.mandrillapp.com')
+EMAIL_HOST_USER = os.environ('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

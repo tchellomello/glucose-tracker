@@ -16,12 +16,6 @@ INTERCOM_APP_ID = None
 GOOGLE_ANALYTICS_TRACKING_ID = None
 ADDTHIS_PUBLISHER_ID = None
 
-EMAIL_HOST = 'smtp.example.com'
-EMAIL_HOST_USER = 'test'
-EMAIL_HOST_PASSWORD = 'test'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
 ADMINS = (
     ('Local Admin', 'admin@glucosetracker.net'),
 )

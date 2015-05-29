@@ -36,12 +36,6 @@ INTERCOM_APP_ID = 'a6d0326564469dfd7f7d9b1bfc909ee3815a85a8'
 GOOGLE_ANALYTICS_TRACKING_ID = 'UA-45698014-1'
 ADDTHIS_PUBLISHER_ID = 'ra-52fffdf9456ec7d2'
 
-EMAIL_HOST = os.environ['EMAIL_HOST']
-EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
 # The 'From:' header of admin-related emails.
 DEFAULT_FROM_EMAIL = 'info@glucosetracker.net'
 
