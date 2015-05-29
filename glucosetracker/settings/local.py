@@ -37,7 +37,7 @@ DATABASES = {
         'NAME': 'glucosetracker',
         'USER': 'glucosetracker',
         'PASSWORD': 'password',
-        'HOST': os.environ.get('POSTGRESQL_HOST', 'localhost'),
+        'HOST': os.getenv('POSTGRESQL_HOST', 'localhost'),
         'PORT': '',
     }
 }
