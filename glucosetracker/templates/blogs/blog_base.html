@@ -67,22 +67,21 @@
 var mailingListSignupForm = $('#mailing-list-signup-form');
 
 mailingListSignupForm.validate({
-    errorClass: "small text-danger"
-});
-
-mailingListSignupForm.submit(function () {
-    $.ajax({
-        type: mailingListSignupForm.attr('method'),
-        url: "{% url 'mailing_list_signup_ajax_view' %}",
-        data: mailingListSignupForm.serialize(),
-        success: function (data, textStatus, xhr) {
-            alert("Thanks for signing up!");
-        },
-        error: function(data) {
-            alert('Sorry, something went wrong. Please try again.');
-        }
-    });
-    return false;
+    errorClass: "small text-danger",
+    submitHandler: function(form) {
+        $.ajax({
+            type: mailingListSignupForm.attr('method'),
+            url: "{% url 'mailing_list_signup_ajax_view' %}",
+            data: mailingListSignupForm.serialize(),
+            success: function (data, textStatus, xhr) {
+                alert("Thanks for signing up!");
+            },
+            error: function(data) {
+                alert('Sorry, something went wrong. Please try again.');
+            }
+        });
+        return false;
+    }
 });
 </script>
 {% endblock %}
