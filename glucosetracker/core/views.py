@@ -1,13 +1,23 @@
-from django.views.generic import TemplateView, FormView
+import logging
+
+from django.views.generic import TemplateView, FormView, View
 from django.contrib import messages
 from django.core.mail import EmailMessage
 from django.conf import settings
 
-from braces.views import LoginRequiredMixin
+import mailchimp
+from braces.views import (
+    AjaxResponseMixin,
+    JSONResponseMixin,
+    LoginRequiredMixin,
+)
 
 from glucoses.models import Glucose
 
 from .forms import ContactForm
+
+
+logger = logging.getLogger(__name__)
 
 
 class HomePageView(TemplateView):
@@ -66,3 +76,37 @@ class HelpPageView(LoginRequiredMixin, FormView):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
+
+
+class MailingListSignupAjaxView(JSONResponseMixin, AjaxResponseMixin, View):
+    """
+    Sign up an email address to a MailChimp list.
+    """
+
+    def post_ajax(self, request, *args, **kwargs):
+        email = request.POST.get('email').strip().lower()
+        mailchimp_list_id = settings.MAILCHIMP_LIST_ID
+
+        response_dict = {
+            'message': '{0} successfully subscribed to {1}!'.format(
+                email, mailchimp_list_id),
+        }
+
+        mc = mailchimp.Mailchimp(settings.MAILCHIMP_API_KEY)
+
+        try:
+            mc.lists.subscribe(
+                id=mailchimp_list_id,
+                email={'email': email},
+                update_existing=True,
+                double_optin=True,
+            )
+            logger.info('%s successfully subscribed to %s', email,
+                        mailchimp_list_id)
+        except mailchimp.Error, e:
+            logger.error('A MailChimp error occurred: %s', e)
+
+            response_dict['message'] = 'Sorry, an error occurred.'
+            return self.render_json_response(response_dict, status=500)
+
+        return self.render_json_response(response_dict)

@@ -34,6 +34,9 @@ django_settings_file: settings.local
 load_random_glucose_data: yes
 test_user: jsmith
 
+mailchimp_api_key: na
+mailchimp_list_id: na
+
 aws_access_key_id: na
 aws_secret_access_key: na
 
