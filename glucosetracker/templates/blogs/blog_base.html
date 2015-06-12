@@ -65,10 +65,9 @@
 {% block extrajs %}
 <script>
 var mailingListSignupForm = $('#mailing-list-signup-form');
-
 mailingListSignupForm.validate({
     errorClass: "small text-danger",
-    submitHandler: function(form) {
+    submitHandler: function() {
         $.ajax({
             type: mailingListSignupForm.attr('method'),
             url: "{% url 'mailing_list_signup_ajax_view' %}",
