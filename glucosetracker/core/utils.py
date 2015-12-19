@@ -27,7 +27,7 @@ def round_value(value):
     If the value is 0 or None, then simply return 0.
     """
     if value:
-       return round(float(value), 1)
+        return round(float(value), 1)
     else:
         return 0
 

@@ -82,7 +82,7 @@ class GlucoseManager(models.Manager):
         data = self.by_date(start_date, end_date, user)
 
         return data.values('record_date')\
-            .annotate(avg_value= models.Avg('value'))\
+            .annotate(avg_value=models.Avg('value'))\
             .order_by('record_date')
 
 
