@@ -72,7 +72,7 @@ class GlucoseManager(models.Manager):
         data = self.by_date(start_date, end_date, user)
 
         return data.values('category__name')\
-            .annotate(avg_value= models.Avg('value'))\
+            .annotate(avg_value=models.Avg('value'))\
             .order_by('category')
 
     def avg_by_day(self, start_date, end_date, user):
