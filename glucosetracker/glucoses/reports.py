@@ -324,8 +324,13 @@ class GlucoseCsvReport(GlucoseBaseReport):
     def email(self, recipient, subject='', message=''):
         message = '%s\n\n\n%s' % (message, self.email_footer)
         
-        email = EmailMessage(from_email=settings.CONTACTS['info_email'],
-                             subject=subject, body=message, to=[recipient])
+        email = EmailMessage(
+            from_email=settings.CONTACTS['info_email'],
+            subject=subject,
+            body=message,
+            to=[recipient],
+            headers={'Reply-To': self.user.email},
+        )
 
         attachment_filename = 'GlucoseData_%sto%s.csv' % \
                               (self.start_date.strftime(FILENAME_DATE_FORMAT),
@@ -439,8 +444,13 @@ class GlucosePdfReport(GlucoseBaseReport):
     def email(self, recipient, subject='', message=''):
         message = '%s\n\n\n%s' % (message, self.email_footer)
 
-        email = EmailMessage(from_email=settings.CONTACTS['info_email'],
-                             subject=subject, body=message, to=[recipient])
+        email = EmailMessage(
+            from_email=settings.CONTACTS['info_email'],
+            subject=subject,
+            body=message,
+            to=[recipient],
+            headers={'Reply-To': self.user.email},
+        )
 
         attachment_filename = 'GlucoseData_%sto%s.pdf' % \
                               (self.start_date.strftime(FILENAME_DATE_FORMAT),
