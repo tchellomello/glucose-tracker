@@ -478,11 +478,8 @@ class GlucosePdfReport(GlucoseBaseReport):
 
             Paragraph objects can be easily formatted using HTML-like tags
             and automatically wrap inside a table.
-
-            The data is converted to a string first to prevent errors in case
-            it is a 'None' value.
             """
-            return Paragraph(str(data), self.styles['Left'])
+            return Paragraph(unicode(data), self.styles['Left'])
 
     def __convert_data(self, data):
         """
