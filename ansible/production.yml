@@ -2,17 +2,19 @@
 
 - name: Create a GlucoseTracker production server
   hosts: all
-  sudo: yes
-  sudo_user: root
+  become: yes
+  become_user: root
   remote_user: root
   vars:
     - setup_git_repo: yes
     - setup_cron_jobs: yes
     - update_apt_cache: yes
   vars_files:
-    - env_vars/production
+    - env_vars/{{ env }}.yml
 
   roles:
     - base
-    - db
+    - certbot
+#    - db
     - web
+    - nginx
