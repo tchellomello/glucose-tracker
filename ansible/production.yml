@@ -10,7 +10,7 @@
     - setup_cron_jobs: yes
     - update_apt_cache: yes
   vars_files:
-    - env_vars/{{ env }}.yml
+    - env_vars/production.yml
 
   roles:
     - base
