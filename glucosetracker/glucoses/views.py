@@ -218,7 +218,8 @@ class GlucoseEmailReportView(LoginRequiredMixin, FormView):
     template_name = 'glucoses/glucose_email_report.html'
 
     def get_initial(self):
-        display_name = self.request.user.get_full_name() or self.request.user
+        display_name = self.request.user.get_full_name() or \
+                       self.request.user.username
         message = 'Glucose data for %s.\n\nThis email was sent by: %s' % (
             display_name, self.request.user.email)
 
