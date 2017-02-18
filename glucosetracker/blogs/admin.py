@@ -4,7 +4,8 @@ from django import forms
 from django.contrib import admin
 
 from redactor.widgets import RedactorEditor
-from blogs.models import Blog
+
+from blogs.models import Blog, BlogAd
 
 
 class BlogAdminForm(forms.ModelForm):
@@ -65,4 +66,9 @@ class BlogAdmin(admin.ModelAdmin):
         super(BlogAdmin, self).save_model(request, obj, form, change)
 
 
+class BlogAdAdmin(admin.ModelAdmin):
+    list_display = ('description', 'position', 'created', 'modified')
+
+
 admin.site.register(Blog, BlogAdmin)
+admin.site.register(BlogAd, BlogAdAdmin)

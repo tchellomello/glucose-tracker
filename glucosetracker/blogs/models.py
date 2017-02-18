@@ -70,3 +70,26 @@ class Blog(TimeStampedModel):
 
     def __unicode__(self):
         return self.title
+
+
+class BlogAd(TimeStampedModel):
+    TOP = 'top'
+    MIDDLE = 'middle'
+    BOTTOM = 'bottom'
+    POSITION_CHOICES = (
+        (TOP, 'Top'),
+        (MIDDLE, 'Middle'),
+        (BOTTOM, 'Bottom'),
+    )
+
+    description = models.CharField(max_length=255, null=True, blank=True)
+    code = models.TextField()
+    position = models.CharField(
+        max_length=10,
+        null=True,
+        blank=True,
+        choices=POSITION_CHOICES,
+    )
+
+    def __unicode__(self):
+        return self.description

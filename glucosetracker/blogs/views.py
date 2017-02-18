@@ -3,7 +3,7 @@ from django.views.generic import DetailView, ListView
 
 from taggit.models import TaggedItem
 
-from .models import Blog
+from .models import Blog, BlogAd
 
 
 class BlogBaseView(ContextMixin):
@@ -28,6 +28,17 @@ class BlogDetailView(DetailView, BlogBaseView):
             return Blog.objects.all()
         else:
             return Blog.objects.publicly_viewable()
+
+    def get_context_data(self, **kwargs):
+        context = super(BlogDetailView, self).get_context_data(**kwargs)
+        context['ad_top'] = BlogAd.objects.filter(position=BlogAd.TOP)\
+            .order_by('?').first()
+        context['ad_middle'] = BlogAd.objects.filter(position=BlogAd.MIDDLE)\
+            .order_by('?').first()
+        context['ad_bottom'] = BlogAd.objects.filter(position=BlogAd.BOTTOM)\
+            .order_by('?').first()
+
+        return context
 
 
 class BlogListView(ListView, BlogBaseView):
