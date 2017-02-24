@@ -15,18 +15,14 @@
 
     <!-- Top Ad -->
     {% if ad_top %}
-        <div class="alert alert-warning text-center">
-            {{ ad_top.code|safe }}
-        </div>
+        {{ ad_top.code|safe }}
     {% endif %}
 
     <div style="font-size:15px;line-height:25px;">{{ blog.content|safe }}</div>
 
     <!-- Bottom Ad -->
     {% if ad_bottom %}
-        <div class="alert alert-warning text-center">
-            {{ ad_bottom.code|safe }}
-        </div>
+        {{ ad_bottom.code|safe }}
     {% endif %}
 
     <div>
