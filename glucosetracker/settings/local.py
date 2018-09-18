@@ -1,6 +1,5 @@
 from .base import *
 
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -9,7 +8,8 @@ TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = []
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '79&vz)($@07na+25vw4nb0r^p*6w0j+-x!m)y5p#76tp!gvs_5'
+KEY = '79&vz)($@07na+25vwZZZ0102b0r^p*6w0j+-x!m)y5p#76tp!gvs_5'
+SECRET_KEY = os.getenv('SECRET_KEY', KEY)
 
 # 3rd-party apps tracking IDs.
 INTERCOM_APP_ID = None
@@ -17,7 +17,7 @@ GOOGLE_ANALYTICS_TRACKING_ID = None
 ADDTHIS_PUBLISHER_ID = None
 
 ADMINS = (
-    ('Local Admin', 'admin@glucosetracker.net'),
+    ('Local Admin', 'info@glucosetracker.net'),
 )
 
 MANAGERS = ADMINS
@@ -35,8 +35,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'glucosetracker',
-        'USER': 'glucosetracker',
-        'PASSWORD': 'password',
+        'USER': os.getenv('POSTGRESQL_USER', 'password'),
+        'PASSWORD': os.getenv('POSTGRESQL_PASSWORD', 'password'),
         'HOST': os.getenv('POSTGRESQL_HOST', 'localhost'),
         'PORT': '',
     }
